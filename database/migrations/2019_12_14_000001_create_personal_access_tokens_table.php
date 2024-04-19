@@ -21,6 +21,11 @@ return new class extends Migration
             $table->timestamp('expires_at')->nullable();
             $table->timestamps();
         });
+
+        // Add index with specified key length and custom name
+        Schema::table('personal_access_tokens', function (Blueprint $table) {
+            $table->index(['tokenable_type', 'tokenable_id'], 'personal_access_tokens_tokenable_index');
+        });
     }
 
     /**
